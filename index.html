@@ -1,6 +1,36 @@
 <html>
+<head>
+	<meta charset="utf-8">
+	<style>
+		body {
+			background-color:gray;
+		}
+		.container {
+			width:80%;
+			left:10%;
+			top:5%;
+			float:top;
+			position:absolute;
+			background-color:#444;
+			overflow:auto;
+		}
+		h1 {
+			text-align:center;
+		}
+		.innerContainer {
+			background-color:white;
+			margin:2%;
+		}
+		canvas {
+			position:relative;
+			width:96%;
+			margin:2%;
+		}
+	</style>
+</head>
 <body>
-	<div style="width:250px;float:left">
+<div class="container">
+	<div class="innerContainer" style="width:25%;min-width:200px;float:left">
 
 		<h1>Strategies</h1><br>
 
@@ -10,14 +40,17 @@
 		<input id="button2" type="button" value="Strategy 2"></input>
 	
 	</div>
-	<div style="float:left">
+	<div class="innerContainer" style="width:65%;min-width:500px;float:left">
 	
 		<h1>Output</h1>
+		
+		<canvas id="defaultCanvas"></canvas>
 		
 		<textarea id="output"></textarea>
 	
 	</div>
 
+</div>
 <script src="main.js"></script>
 </body>
 </html>

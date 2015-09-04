@@ -11,4 +11,4 @@ var MODULE = (function (m) {
 	
 	console.log("Strategy 1 loaded");
 	return m;
-}(MODULE || {}));
+}(MODULE));
