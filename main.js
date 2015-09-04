@@ -6,15 +6,16 @@ var MODULE = (function () {
 	m.height = 20;
 	var canvas = document.getElementById("defaultCanvas");
 	
-	/* This function will be overwritten by the loaded modules */
+	/* This function will be overwritten by the loaded modules
 	m.loop = function () {
 		document.getElementById("output").value = "no modules loaded yet";
-	}
+	}*/
 	
-	m.repeater = function() {
-		m.loop();
+	/* This function is the basic loop.
+	 * It is called every 250 milliseconds*/
+	m.loop = function() {
 		m.drawCanvas();
-		window.setTimeout(m.repeater, milliseconds);
+		window.setTimeout(m.loop, milliseconds);
 	}
 	
 	/* This function can be used to add scripts after the html document has been loaded
@@ -27,6 +28,10 @@ var MODULE = (function () {
 		head[0].appendChild(script);
 	}
 	
+	/*
+	 * Clears the 2d array m.cells, creating it if it doesn't exist
+	 * m.cells is m.width wide and m.height high
+	 */
 	m.clearCells = function () {
 		if (!m.cells) {
 			m.cells = [];
@@ -44,8 +49,12 @@ var MODULE = (function () {
 		}
 	}
 	
+	/*
+	 * Draws the current state of the game of life on the canvas
+	 */
 	m.drawCanvas = function () {
 		var context = canvas.getContext('2d');
+		context.clearRect(0, 0, canvas.width, canvas.height);
 		
 		context.fillStyle = '#08a';
 		for(i = 0; i < m.width; i++)
@@ -72,6 +81,10 @@ var MODULE = (function () {
 		}
 	}
 	
+	/*
+	 * Resizes the canvas to fit the page sizeToContent
+	 * Redraws the canvas immediately to avoid flickering
+	 */
 	m.resizeCanvas = function (e) {
 		canvas.width = canvas.scrollWidth;
 		canvas.height = canvas.width * m.height / m.width;
@@ -79,20 +92,39 @@ var MODULE = (function () {
 	}
 	window.addEventListener("resize", m.resizeCanvas);
 	
+	/*
+	 * The following lines set up the ability to change cells by clicking and holding the left mouse button
+	 */
+	var isDown = false;
+	var makeAlive;
+	canvas.addEventListener("mousemove", function (e) {
+		if (!isDown)
+			return;
+		var canvasRect = canvas.getBoundingClientRect();
+		m.cells[Math.min(m.width - 1, Math.max(0, Math.floor((e.clientX - canvasRect.left) / canvas.width * m.width)))][Math.min(m.height - 1, Math.max(0, Math.floor((e.clientY - canvasRect.top) / canvas.height * m.height)))] = makeAlive;
+	});
+	canvas.addEventListener("mousedown", function (e) {
+		isDown = true;
+		var canvasRect = canvas.getBoundingClientRect();
+		makeAlive = !m.cells[Math.min(m.width - 1, Math.max(0, Math.floor((e.clientX - canvasRect.left) / canvas.width * m.width)))][Math.min(m.height - 1, Math.max(0, Math.floor((e.clientY - canvasRect.top) / canvas.height * m.height)))];
+	})
+	canvas.addEventListener("mouseup", function (e) {isDown = false;})
+	canvas.addEventListener("mouseout", function (e) {isDown = false;})
+	
 	m.start = function() {
 		// create and fill the array that determines whether cells are alive
 		m.clearCells();
 		// resize the canvas to fit the page and draws it
 		m.resizeCanvas();
 		// start the actual loop
-		m.repeater();
+		m.loop();
 	}
 	
 	console.log("MODULE loaded");
 	return m;
 }());
 
-/* The following 3 functions are called for strategy loading when the respective button is pressed */
+/* The following 2 functions are called for strategy loading when the respective button is pressed */
 document.getElementById("button1").onclick = function () {
 	MODULE.loadModule("strategy1.js");
 }
