@@ -1,19 +1,39 @@
 var MODULE = (function () {
 	
 	var m = {};
-	var milliseconds = 250;
+	var milliseconds = 100;
 	m.width = 30;
 	m.height = 20;
 	var canvas = document.getElementById("defaultCanvas");
+	m.playing = false;
 	
 	/* This function will be overwritten by the loaded modules
 	m.loop = function () {
 		document.getElementById("output").value = "no modules loaded yet";
 	}*/
 	
+	m.updateCells = function () {
+		var newCells = [];
+		for(i = 0; i < m.width; i++) {
+			newCells[i] = [];
+			for(j = 0; j < m.height; j++) {
+				newCells[i][j] = m.calculateCell(m.cells[i][j], [m.cells[(m.width + i - 1) % m.width][(m.height + j - 1) % m.height], m.cells[(m.width + i - 1) % m.width][j], m.cells[(m.width + i - 1) % m.width][(j + 1) % m.height],
+												m.cells[i][(m.height + j - 1) % m.height], m.cells[i][(j + 1) % m.height], 
+												m.cells[(i + 1) % m.width][(m.height + j - 1) % m.height], m.cells[(i + 1) % m.width][j], m.cells[(i + 1) % m.width][(j + 1) % m.height]]);
+			}
+		}
+		m.cells = newCells;
+	}
+	
+	m.calculateCell = function (isAlive, neighbours) {
+		return isAlive;
+	}
+	
 	/* This function is the basic loop.
 	 * It is called every 250 milliseconds*/
 	m.loop = function() {
+		if (m.playing)
+			m.updateCells();
 		m.drawCanvas();
 		window.setTimeout(m.loop, milliseconds);
 	}
@@ -37,16 +57,19 @@ var MODULE = (function () {
 			m.cells = [];
 			for(i = 0; i < m.width; i++) {
 				m.cells[i] = [];
-				for(j = 0; j < m.width; j++) {
+				for(j = 0; j < m.height; j++) {
 					m.cells[i][j] = false;
 				}
 			}
 		} else {
 			for(i = 0; i < m.width; i++)
-				for(j = 0; j < m.width; j++) {
+				for(j = 0; j < m.height; j++) {
 					m.cells[i][j] = false;
 				}
 		}
+		m.cells[2][3] = true;
+		m.cells[2][4] = true;
+		m.cells[2][5] = true;
 	}
 	
 	/*
@@ -97,7 +120,8 @@ var MODULE = (function () {
 	 */
 	var isDown = false;
 	var makeAlive;
-	canvas.addEventListener("mousemove", function (e) {
+	var mousemove;
+	canvas.addEventListener("mousemove", mousemove = function (e) {
 		if (!isDown)
 			return;
 		var canvasRect = canvas.getBoundingClientRect();
@@ -107,11 +131,13 @@ var MODULE = (function () {
 		isDown = true;
 		var canvasRect = canvas.getBoundingClientRect();
 		makeAlive = !m.cells[Math.min(m.width - 1, Math.max(0, Math.floor((e.clientX - canvasRect.left) / canvas.width * m.width)))][Math.min(m.height - 1, Math.max(0, Math.floor((e.clientY - canvasRect.top) / canvas.height * m.height)))];
+		mousemove(e);
 	})
 	canvas.addEventListener("mouseup", function (e) {isDown = false;})
 	canvas.addEventListener("mouseout", function (e) {isDown = false;})
 	
 	m.start = function() {
+		m.playing = true;
 		// create and fill the array that determines whether cells are alive
 		m.clearCells();
 		// resize the canvas to fit the page and draws it
@@ -120,11 +146,19 @@ var MODULE = (function () {
 		m.loop();
 	}
 	
+	m.pause = function () {
+		m.playing = !m.playing;
+		document.getElementById("pause").value = m.playing ? "Pause" : "Play";
+	}
+	
 	console.log("MODULE loaded");
 	return m;
 }());
 
 /* The following 2 functions are called for strategy loading when the respective button is pressed */
+document.getElementById("pause").onclick = function () {
+	MODULE.pause();
+}
 document.getElementById("button1").onclick = function () {
 	MODULE.loadModule("strategy1.js");
 }
