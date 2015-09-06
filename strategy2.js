@@ -6,9 +6,9 @@ var MODULE = (function (m) {
 			if (neighbours[i])
 				livingNeigbours++;
 		if (isAlive) {
-			return livingNeigbours == 2 || livingNeigbours == 3;
+			return livingNeigbours == 1 || livingNeigbours == 3 || livingNeigbours == 4 || livingNeigbours == 2;
 		} else {
-			return livingNeigbours == 3 || livingNeigbours == 4 || livingNeigbours == 8;
+			return livingNeigbours == 3;
 		}
 	}
 	
