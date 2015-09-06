@@ -2,8 +2,8 @@ var MODULE = (function () {
 	
 	var m = {};
 	var milliseconds = 100;
-	m.width = 30;
-	m.height = 20;
+	m.width = 60;
+	m.height = 40;
 	var canvas = document.getElementById("defaultCanvas");
 	m.playing = false;
 	
@@ -88,7 +88,7 @@ var MODULE = (function () {
 					context.fill();
 				}
 		
-		context.strokeStyle = '#000';
+		context.strokeStyle = '#888';
 		context.lineWidth = 1;
 		for(i = 0; i <= m.width; i++) {
 			context.beginPath();
