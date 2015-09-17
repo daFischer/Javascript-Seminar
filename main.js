@@ -1,7 +1,6 @@
-var MODULE = (function () {
+var MODULE = (function (m) {
 	
-	var m = {};
-	var milliseconds = 100;
+	m.milliseconds = 100;
 	m.width = 60;
 	m.height = 40;
 	var canvas = document.getElementById("defaultCanvas");
@@ -35,7 +34,7 @@ var MODULE = (function () {
 		if (m.playing)
 			m.updateCells();
 		m.drawCanvas();
-		window.setTimeout(m.loop, milliseconds);
+		window.setTimeout(m.loop, m.milliseconds);
 	}
 	
 	/* This function can be used to add scripts after the html document has been loaded
@@ -67,15 +66,12 @@ var MODULE = (function () {
 					m.cells[i][j] = false;
 				}
 		}
-		m.cells[2][3] = true;
-		m.cells[2][4] = true;
-		m.cells[2][5] = true;
 	}
 	
 	/*
 	 * Draws the current state of the game of life on the canvas
 	 */
-	m.drawCanvas = function () {
+	m.drawCanvas = m.drawCanvas || function () {
 		var context = canvas.getContext('2d');
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		
@@ -153,7 +149,7 @@ var MODULE = (function () {
 	
 	console.log("MODULE loaded");
 	return m;
-}());
+}(MODULE || {}));
 
 /* The following 2 functions are called for strategy loading when the respective button is pressed */
 document.getElementById("pause").onclick = function () {
@@ -164,6 +160,9 @@ document.getElementById("button1").onclick = function () {
 }
 document.getElementById("button2").onclick = function () {
 	MODULE.loadModule("strategy2.js");
+}
+document.getElementById("clear").onclick = document.getElementById("clear").onclick || function () {
+	MODULE.clearCells();
 }
 
 // Start the MODULE loop
