@@ -6,11 +6,9 @@ var MODULE = (function (m) {
 	var canvas = document.getElementById("defaultCanvas");
 	m.playing = false;
 	
-	/* This function will be overwritten by the loaded modules
-	m.loop = function () {
-		document.getElementById("output").value = "no modules loaded yet";
-	}*/
-	
+	/* This function calls the overridable function m.calculateCell for each cell
+	 * It then replaces the old cells array with the results of all these calls
+	*/
 	m.updateCells = function () {
 		var newCells = [];
 		for(i = 0; i < m.width; i++) {
@@ -24,6 +22,8 @@ var MODULE = (function (m) {
 		m.cells = newCells;
 	}
 	
+	/* This function will be overwritten by the loaded modules
+	*/
 	m.calculateCell = function (isAlive, neighbours) {
 		return isAlive;
 	}

@@ -1,3 +1,77 @@
+// main.js
+var MODULE = (function (m) {
+	/* This function calls the overridable function m.calculateCell for each cell
+	 * It then replaces the old cells array with the results of all these calls */
+	m.updateCells = function () {
+		for (var i = 0; i < cells.length; i++) {
+			cells[i] = m.calculateCell(...);
+		};
+	}
+	/* This function will be overwritten by the loaded modules */
+	m.calculateCell = function (isAlive, neighbours) {
+	}
+	m.drawCanvas = m.drawCanvas || function () {
+	}
+	return m;
+}(MODULE || {}));
+
+
+
+// extension.js
+var MODULE = (function (m) {
+	m.drawCanvas = function () {
+	}
+	return m;
+}(MODULE || {}));
+
+
+// strategy.js
+var MODULE = (function (m) {
+	m.calculateCell = function (isAlive, neighbours) {
+	}
+	return m;
+}(MODULE));
+
+
+
+//----------------------------------------
+// ECMASCRIPT 6
+
+// lib.js
+export function circumference(radius) {
+    return radius * 2 * Math.PI;
+}
+
+// main.js
+import {circumference} from 'lib';
+console.log(circumference(3));
+
+
+
+
+// Alternatives:
+
+// main.js imports everything by using a wildcard
+import * as lib from 'lib';
+console.log(lib.circumference(3));
+
+
+
+
+// lib.js has a single default export
+export default class { ··· } // no semicolon!
+
+// main.js
+import MyClass from 'MyClass';
+let inst = new MyClass();
+
+
+
+
+
+
+
+
 
 
 // The code in the beginning, without using any kind of pattern
