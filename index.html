@@ -28,7 +28,7 @@
 
 			<div id ="canvasContainer" class="innerContainer" >
 				<canvas id="defaultCanvas"></canvas>
-				
+
 			</div>
 
 			<div id="controls">
@@ -61,6 +61,21 @@
 							Maze pattern
 						</label>
 					</div>
+
+
+					<div class="radio" style="margin-top: 5%">
+						<label class="labelRadioButtons">
+							<input id="button3"  type="radio" name="optradio" style="margin-top: 2%" data-toggle="popover" title="Life without death" data-content="Cells never die. Empty Cells come alive when they have exactly 3 neighbours" data-placement="bottom" data-trigger="focus" >
+							Life without death
+						</label>
+					</div>
+
+					<div class="radio" style="margin-top: 5%">
+						<label class="labelRadioButtons">
+							<input id="button4"  type="radio" name="optradio" style="margin-top: 2%" data-toggle="popover" title="Day and night" data-content="Cells live to the next generation when they have 3, 6, 7 or 8 neighbours. Empty Cells come alive when they have 3, 4, 6, 7 or 8 neighbours" data-placement="bottom" data-trigger="focus" >
+							Day and night
+						</label>
+					</div>
 				</div>
 
 				<div>
@@ -70,7 +85,7 @@
 						Clear canvas
 					</button>
 				</div>
-				
+
 			</div>
 
 		</div>
@@ -82,8 +97,8 @@
 			});
 		</script>
 
-		<script src="extension.js"></script>
-		<script src="main.js"></script>
+		<script src="javascript/extension.js"></script>
+		<script src="javascript/main.js"></script>
 
 	</body>
 </html>

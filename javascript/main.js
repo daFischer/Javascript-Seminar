@@ -157,10 +157,16 @@ document.getElementById("pause").onclick = document.getElementById("play").oncli
 	MODULE.pause();
 }
 document.getElementById("button1").onclick = function () {
-	MODULE.loadModule("strategy1.js");
+	MODULE.loadModule("javascript/strategy1.js");
 }
 document.getElementById("button2").onclick = function () {
-	MODULE.loadModule("strategy2.js");
+	MODULE.loadModule("javascript/strategy2.js");
+}
+document.getElementById("button3").onclick = function () {
+	MODULE.loadModule("javascript/strategy3.js");
+}
+document.getElementById("button4").onclick = function () {
+	MODULE.loadModule("javascript/strategy4.js");
 }
 document.getElementById("clear").onclick = document.getElementById("clear").onclick || function () {
 	MODULE.clearCells();
