@@ -14,6 +14,11 @@ h2{
     color:#98C24D ;
     font-weight: bold;
 }
+h3 {
+    color: #B7B7B7;
+    text-align: center;
+    font-weight: bold;
+}
 img {
     width: 120px;
     height: 100px;
@@ -37,24 +42,30 @@ canvas {
     left:10%;
     top:5%;
     float:top;
-
     background-color:#444;
-    overflow:auto;
     margin-top: 10%;
 }
 #canvasContainer {
     width:65%;
     min-width:500px;
     float:left;
+    margin-top:2%;
 }
 #controls{
     width:25%;
     min-width:200px;
     float:left;
+    margin-top:-12%
 }
 #navigationBar{
     margin-left: -20%;
     height: 130px;
+}
+#backgroundImg {
+    width: 380px;
+    height: 400px;
+    float: right;
+    margin-top:-5%;
 }
 .labelRadioButtons {
     font-size: 18px;
