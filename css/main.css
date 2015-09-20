@@ -17,7 +17,7 @@ h2{
 h3 {
     color: #B7B7B7;
     text-align: center;
-    font-weight: bold;
+
 }
 img {
     width: 120px;
@@ -55,7 +55,7 @@ canvas {
     width:25%;
     min-width:200px;
     float:left;
-    margin-top:-12%
+    margin-top:-15%
 }
 #navigationBar{
     margin-left: -20%;
