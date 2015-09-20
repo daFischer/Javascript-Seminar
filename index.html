@@ -1,60 +1,85 @@
 <html>
-<head>
-	<meta charset="utf-8">
-	<style>
-		body {
-			background-color:gray;
-		}
-		.container {
-			width:80%;
-			left:10%;
-			top:5%;
-			float:top;
-			position:absolute;
-			background-color:#444;
-			overflow:auto;
-		}
-		h1 {
-			text-align:center;
-		}
-		.innerContainer {
-			background-color:white;
-			margin:2%;
-		}
-		canvas {
-			position:relative;
-			width:96%;
-			margin:2%;
-		}
-	</style>
-</head>
-<body>
-<div class="container">
-	<div class="innerContainer" style="width:25%;min-width:200px;float:left">
+	<head>
+		<title>Conway's Game of Life</title>
+		<meta charset="utf-8">
+		<link rel='shortcut icon' type='image' href='logo-app.gif'>
 
-		<h1>Strategies</h1><br>
+		<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css">
 
-		<input id="pause" type="button" value="Pause"></input>
-		<br>
-		<input id="button1" type="button" value="Strategy 1"></input>
-		<br>
-		<input id="button2" type="button" value="Strategy 2"></input>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
-		<input id="clear" type="button" value="Clear Canvas" style="float:right;"></input>
-	
-	</div>
-	<div class="innerContainer" style="width:65%;min-width:500px;float:left">
-	
-		<h1>Output</h1>
-		
-		<canvas id="defaultCanvas"></canvas>
-		
-		<textarea id="output"></textarea>
-	
-	</div>
+	</head>
 
-</div>
-<script src="extension.js"></script>
-<script src="main.js"></script>
-</body>
+	<body>
+		<div id="navigationBar" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+
+				<div class="navbar-header" >
+					<img src="logo-app.gif"  alt="logo">
+				</div>
+
+				<h1>Conway's Game of Life</h1>
+			</div>
+		</div>
+
+		<div  id="contentContainer" class="container">
+
+			<div id ="canvasContainer" class="innerContainer" >
+				<canvas id="defaultCanvas"></canvas>
+				<textarea id="output"></textarea>
+			</div>
+
+			<div id="controls">
+
+				<br/>
+				<div>
+					<h2>Start/pause your game now</h2>
+					<button id="pause" type="button" class="btn btn-default btn-lg" style="text-align: left;">
+						<span class=" glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+						Pause
+					</button>
+				</div>
+
+				<div>
+					<h2>Choose your favourite strategy</h2>
+					<div class="radio">
+						<label class="labelRadioButtons">
+							<input id="button1" type="radio" name="optradio" style="margin-top: 2%" data-toggle="popover" title="Strategy 1" data-content="Explanaition of strategy 1" data-placement="top" data-trigger="focus" >
+							Strategy 1
+						</label>
+					</div>
+
+					<div class="radio" style="margin-top: 5%">
+						<label class="labelRadioButtons">
+							<input id="button2"  type="radio" name="optradio" style="margin-top: 2%" data-toggle="popover" title="Strategy 2" data-content="Explanation of strategy 2" data-placement="bottom" data-trigger="focus" >
+							Strategy 2
+						</label>
+					</div>
+				</div>
+
+				<div>
+					<h2>Make your canvas clear</h2>
+					<button id="clear" type="button" class="btn btn-default btn-lg" style="text-align: left">
+						<span class=" glyphicon glyphicon-refresh" aria-hidden="true" ></span>
+						Clear canvas
+					</button>
+				</div>
+				
+			</div>
+
+		</div>
+
+
+		<script>
+			$(document).ready(function(){
+				$('[data-toggle="popover"]').popover();
+			});
+		</script>
+
+		<script src="extension.js"></script>
+		<script src="main.js"></script>
+
+	</body>
 </html>

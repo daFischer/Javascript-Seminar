@@ -1,0 +1,79 @@
+body {
+    background-color:gray;
+    overflow-y: scroll;
+}
+h1{
+    color: #98C24D;
+    margin-left: 50%;
+    margin-top: 5%;
+    font-weight: bold;
+}
+h2{
+    font-size: 22px;
+    margin-top: 15%;
+    color:#98C24D ;
+    font-weight: bold;
+}
+img {
+    width: 120px;
+    height: 100px;
+    margin-top: 9%;
+}
+button {
+    margin-left: 2%;
+    margin-top: 2%;
+    height: 40px;
+    width: 70%;
+    background-color: #EBEBEB;
+    text-align: left;
+}
+canvas {
+    position:relative;
+    width:96%;
+    margin:2%;
+}
+#contentContainer {
+    width:80%;
+    left:10%;
+    top:5%;
+    float:top;
+
+    background-color:#444;
+    overflow:auto;
+    margin-top: 10%;
+}
+#canvasContainer {
+    width:65%;
+    min-width:500px;
+    float:left;
+}
+#controls{
+    width:25%;
+    min-width:200px;
+    float:left;
+}
+#navigationBar{
+    margin-left: -20%;
+    height: 130px;
+}
+.labelRadioButtons {
+    font-size: 18px;
+    font-family: inherit;
+    font-weight: normal;
+    margin-left: 5%;
+    margin-top:2%;
+    color:#2B2B2B;
+}
+
+.innerContainer {
+    background-color:white;
+    margin:2%;
+}
+.radio{
+    width: 70%;
+    height: 40px;
+    border-radius: 4px;
+    margin-left: 2%;
+    background-color: #EBEBEB;
+    margin-top: 5%;
+}
