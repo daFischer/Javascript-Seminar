@@ -133,7 +133,7 @@ var MODULE = (function (m) {
 	canvas.addEventListener("mouseout", function (e) {isDown = false;})
 	
 	m.start = function() {
-		m.playing = true;
+		m.playing = false;
 		// create and fill the array that determines whether cells are alive
 		m.clearCells();
 		// resize the canvas to fit the page and draws it
@@ -144,7 +144,8 @@ var MODULE = (function (m) {
 	
 	m.pause = function () {
 		m.playing = !m.playing;
-		document.getElementById("pause").value = m.playing ? "Pause" : "Play";
+		document.getElementById("play").style.display = m.playing ? "none" : "inline";
+		document.getElementById("pause").style.display = m.playing ? "inline" : "none";
 	}
 	
 	console.log("MODULE loaded");
@@ -152,7 +153,7 @@ var MODULE = (function (m) {
 }(MODULE || {}));
 
 /* The following 2 functions are called for strategy loading when the respective button is pressed */
-document.getElementById("pause").onclick = function () {
+document.getElementById("pause").onclick = document.getElementById("play").onclick = function () {
 	MODULE.pause();
 }
 document.getElementById("button1").onclick = function () {

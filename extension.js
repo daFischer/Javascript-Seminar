@@ -89,4 +89,6 @@ var MODULE = (function (m) {
 document.getElementById("clear").onclick = function () {
 	MODULE.clearPast();
 	MODULE.clearCells();
+	if(MODULE.playing)
+		MODULE.pause();
 }

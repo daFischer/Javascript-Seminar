@@ -28,7 +28,7 @@
 
 			<div id ="canvasContainer" class="innerContainer" >
 				<canvas id="defaultCanvas"></canvas>
-				<textarea id="output"></textarea>
+				
 			</div>
 
 			<div id="controls">
@@ -36,9 +36,13 @@
 				<br/>
 				<div>
 					<h2>Start/pause your game now</h2>
-					<button id="pause" type="button" class="btn btn-default btn-lg" style="text-align: left;">
-						<span class=" glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+					<button id="pause" type="button" class="btn btn-default btn-lg" style="text-align: left; display:none">
+						<span class=" glyphicon glyphicon-pause" aria-hidden="true"></span>
 						Pause
+					</button>
+					<button id="play" type="button" class="btn btn-default btn-lg" style="text-align: left;">
+						<span class=" glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+						Play
 					</button>
 				</div>
 
