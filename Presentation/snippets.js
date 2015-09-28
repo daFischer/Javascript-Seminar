@@ -111,7 +111,7 @@ var login = new function () {
 
 // Problem: The name and the login function should be accessible from the outside
 // Solution: Module Export
-MODULE = (function ($) {
+var MODULE = (function ($) {
 	var m = {};
 	m.name = $("#nameField").val();
 	var password = "password";
@@ -126,7 +126,7 @@ MODULE = (function ($) {
 
 // Problem: We want to extend our module (e.g. write a real login function)
 // Solution: (Tight) Module Augmentation
-MODULE = (function (m) {
+var MODULE = (function (m) {
 	m.login = new function () {
 		console.log(name + " trying to log in");
 		someLoginMethod(m.name, password);
@@ -137,19 +137,19 @@ MODULE = (function (m) {
 
 
 
+// CHANGED
 // Problem: password is not readable in the new module file (different environment)
 // Solution: Shared private state
 // If this snippet doesn't fit on one slide, maybe we'll have to move m.loadModule to the next slide
-var MODULE = (function () {
-	var m = {};
-	var _private = m._private = {};
-	_private.seal = function () {
+var MODULE = (function (m) {
+	var _private = m._private = m._private || {};
+	_private.seal = _private.seal || function () {
 			delete m._private;
 		};
-	_private.unseal = function () {
+	_private.unseal = _private.unseal || function () {
 			m._private = _private;
 		};
-	m.loadModule = function (url) {
+	m.loadModule = m.loadModule || function (url) {
 		_private.unseal()
 		loadJSFile(url);
 		_private.seal();
@@ -157,13 +157,13 @@ var MODULE = (function () {
 	// ...
 	_private.seal();
 	return m
-}());
+}(MODULE || {}));
 
 
 
 // Problem: A module split into several files should be loaded in parallel for efficiency
 // Solution: Loose Augmentation
-MODULE = (function (m) {
+var MODULE = (function (m) {
 	m.method1 = new function () {
 		// ...
 	}
@@ -171,7 +171,7 @@ MODULE = (function (m) {
 	return m;
 }) (MODULE || {});
 
-MODULE = (function (m) {
+var MODULE = (function (m) {
 	m.method2 = new function () {
 		// ...
 	}
@@ -183,7 +183,7 @@ MODULE = (function (m) {
 
 // Submodules
 // loose augmentation
-MODULE = MODULE || {};
+var MODULE = MODULE || {};
 
 MODULE.sub = (function () {
 	var s = {};
@@ -193,13 +193,14 @@ MODULE.sub = (function () {
 
 
 
+// CHANGED
 // Since modules simulate classes, why not add inheritance?
 // Solution: (PARENT Module has to exist, so this can't load in parallel)
 var MODULE = (function (parent) {
 	var m = {};
 
-	for(var key in parent) {
-		if(parent.hasOwnProperty(key)) {
+	for(var key in parent)
+		if(parent.hasOwnProperty(key))
 			m[key] = parent[key];
 
 	m.parent = parent;	// important to do this last
